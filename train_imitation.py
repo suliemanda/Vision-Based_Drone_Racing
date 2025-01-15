@@ -289,9 +289,13 @@ def main():
         
         
         lr=Schedule.get_lr()[0]
+        if(_%50==0 and lr>2e-6) :
+            Schedule.step()
         if((_+1)%500==0):
-            torch.save(student_model.state_dict(), f"results/models/imitation_model_{_}.pth")
-            torch.save(optimizer.state_dict(),f"results/models/optF{_}.pth")
+            torch.save(student_model.state_dict(), f"results/models/imitation_model_{_+1}.pth")
+            torch.save(optimizer.state_dict(),f"results/models/optF{_+1}.pth")
+        if(_>1000 and _%500==0 and ep>0.3):
+            ep=ep-0.1
         avg_DAsequence_loss=DAseq_loss.detach().item()
         avg_actloss=avg_actloss/(ep_len+1)
         avg_simloss=avg_simloss/(ep_len+1)
