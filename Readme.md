@@ -1,6 +1,3 @@
-Here is the full `README.md` file written as code that you can copy and use directly:
-
-```markdown
 # Vision-Based Autonomous Drone Racing
 
 ## Description
